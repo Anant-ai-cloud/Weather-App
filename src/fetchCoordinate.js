@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux"
 import { setLat, setLon } from "./reduxstore/weatherDataSlice"
+import axios from "axios"
 
 const fetchCoordinate = async()=>{
     const dispatch = useDispatch()
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY
       try {
         
         const res = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=Delhi,IN&limit=5&appid=${apiKey}`)

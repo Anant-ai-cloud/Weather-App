@@ -4,20 +4,22 @@ import viteLogo from '/vite.svg'
 import axios from 'axios'
 import fetchCoordinate from './fetchCoordinate.js'
 import { useSelector } from 'react-redux'
+import currentWeather from './weather/currentWeather.js'
 
 
 function App() {
   const [coordinate, setCoordinate] = useState(null)
 
-  const apiKey = import.meta.env.VITE_WEATHER_API_KEY
-  console.log(apiKey)
+
+
 
   const lat = useSelector(state=> state.weather.lat)
   const lon = useSelector(state=> state.weather.lon)
 
-  useEffect(()=>{
+ 
     fetchCoordinate()
-  },[])
+    currentWeather()
+  
 
   console.log(lat)
   console.log(lon)
