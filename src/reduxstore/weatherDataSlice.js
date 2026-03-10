@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    temp: null,
-    lat:0,
-    lon:0
+    data: null,
+    currentTemp: null,
+    visibility: 0,
+    wind: null
+  
 }
 
 const weatherDataSlice = createSlice({
@@ -12,26 +14,30 @@ const weatherDataSlice = createSlice({
     initialState,
     reducers: {
 
+        setData: (state, action)=>{
+
+         state.data = action.payload
+        
+
+        },
+
         setTemp: (state, action)=>{
-
-         state.temp = action.payload
-
+            state.currentTemp = action.payload
         },
 
-        setLat: (state, action)=>{
-
-            state.lat = action.payload
-
+        setVisibility: (state, action)=>{
+            state.visibility = action.payload
         },
-        setLon: (state, action)=>{
 
-            state.lon = action.payload
-            
+        setWind: (state, action)=> {
+            state.wind = action.payload
         }
+
+       
     } 
 
 
 })
 
-export const { setTemp, setLat, setLon } = weatherDataSlice.actions
+export const { setData, setTemp, setVisibility, setWind } = weatherDataSlice.actions
 export default weatherDataSlice.reducer
