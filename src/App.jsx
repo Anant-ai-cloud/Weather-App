@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setData, setTemp, setVisibility, setWind } from './reduxstore/weatherDataSlice.js'
+import Weatherdashboard from './components/Weatherdashboard.jsx'
 
 
 function App() {
@@ -13,17 +14,20 @@ function App() {
   const [lon, setLon] = useState(0)
 
   const data = useSelector(state => state.weather.data)
+  const temp = useSelector(state=> state.weather.currentTemp)
+  const visibility = useSelector(state=> state.weather.visibility)
+  const wind = useSelector(state=> state.weather.wind)
 
   const dispatch = useDispatch()
 
-  const currentWeather = async (lat, lon) => {
+  const weatherData = async (lat, lon) => {
 
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY
     try {
 
        const res1 = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
       const res2 = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
-      console.log(res1)
+     
 
       dispatch(setTemp(res1.data.main))
       dispatch(setWind(res1.data.wind))
@@ -31,7 +35,7 @@ function App() {
 
       const list = res2.data.list
       const report = list.map((item) =>
-        item.main)
+        item)
 
       dispatch(setData(report))
 
@@ -43,6 +47,10 @@ function App() {
 
   }
   console.log(data)
+  console.log(temp)
+  console.log(wind)
+  console.log(visibility)
+
   const fetchCoordinate = async () => {
 
 
@@ -72,7 +80,7 @@ function App() {
 
   useEffect(() => {
     if (lat && lon) {
-      currentWeather(lat, lon)
+      weatherData(lat, lon)
     }
 
   }, [lat, lon])
@@ -86,9 +94,7 @@ function App() {
 
   return (
     <>
-      <div className='text-white'>
-        This is Weather App
-      </div>
+     <Weatherdashboard/>
     </>
   )
 }
