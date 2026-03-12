@@ -34,10 +34,9 @@ function App() {
       dispatch(setVisibility(res1.data.visibility))
 
       const list = res2.data.list
-      const report = list.map((item) =>
-        item)
+    
 
-      dispatch(setData(report))
+      dispatch(setData(list))
 
 
 
@@ -57,7 +56,7 @@ function App() {
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY
     try {
 
-      const res = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=Noida,IN&limit=5&appid=${apiKey}`)
+      const res = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=Dankaur,IN&limit=5&appid=${apiKey}`)
 
 
       console.log(res)

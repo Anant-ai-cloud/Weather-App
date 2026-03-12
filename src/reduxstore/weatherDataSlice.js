@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     data: null,
     currentTemp: null,
+    min: 0,
+    max: 0,
     visibility: 0,
     wind: null
   
@@ -31,6 +33,14 @@ const weatherDataSlice = createSlice({
 
         setWind: (state, action)=> {
             state.wind = action.payload
+        },
+
+        setMin: (state, action)=> {
+            state.min = action.payload
+        }, 
+
+        setMax: (state, action)=> {
+            state.max = action.payload
         }
 
        
@@ -39,5 +49,5 @@ const weatherDataSlice = createSlice({
 
 })
 
-export const { setData, setTemp, setVisibility, setWind } = weatherDataSlice.actions
+export const { setData, setTemp, setVisibility, setWind, setMin, setMax } = weatherDataSlice.actions
 export default weatherDataSlice.reducer
