@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setData, setTemp, setVisibility, setWind } from './reduxstore/weatherDataSlice.js'
+import { setData, setTemp, setVisibility, setWind, setDescription } from './reduxstore/weatherDataSlice.js'
 import Weatherdashboard from './components/Weatherdashboard.jsx'
 
 
@@ -30,6 +30,7 @@ function App() {
      
 
       dispatch(setTemp(res1.data.main))
+      dispatch(setDescription(res1.data.weather[0].description))
       dispatch(setWind(res1.data.wind))
       dispatch(setVisibility(res1.data.visibility))
 
